@@ -57,7 +57,7 @@ func (f *WalkFilesystem) walk(path string, info FileInfo, walkFn WalkFunc) error
 
 	for _, name := range names {
 		filename := filepath.Join(path, name)
-		fileInfo, err := f.Lstat(filename)
+		fileInfo, err := f.Stat(filename)
 		if err != nil {
 			if err := walkFn(filename, fileInfo, err); err != nil && err != SkipDir {
 				return err
@@ -81,7 +81,7 @@ func (f *WalkFilesystem) walk(path string, info FileInfo, walkFn WalkFunc) error
 // large directories Walk can be inefficient.
 // Walk does not follow symbolic links.
 func (f *WalkFilesystem) Walk(root string, walkFn WalkFunc) error {
-	info, err := f.Lstat(root)
+	info, err := f.Stat(root)
 	if err != nil {
 		return walkFn(root, nil, err)
 	}
