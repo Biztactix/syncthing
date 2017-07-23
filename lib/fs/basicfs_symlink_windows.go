@@ -15,7 +15,7 @@ var errNotSupported = errors.New("symlinks not supported")
 func DisableSymlinks() {}
 
 func (BasicFilesystem) SymlinksSupported() bool {
-	return false
+	return true
 }
 
 func (BasicFilesystem) ReadSymlink(path string) (string, error) {
